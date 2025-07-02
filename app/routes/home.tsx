@@ -1,10 +1,10 @@
 import type { Route } from "./+types/home";
-import { Dashboard } from "../dashboard/dashboard";
+import { Dashboard } from "../features/dashboard";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "seizy" },
+    { name: "description", content: "a basic app for tracking pet health" },
   ];
 }
 
