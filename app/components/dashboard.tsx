@@ -38,7 +38,7 @@ export function Dashboard () {
           </div>
           <div className="flex flex-col gap-4 w-1/3">
             <h2 className="text-2xl font-semibold">Calendar</h2>
-            <Calendar className="w-full rounded-xl" today={undefined}/>
+            <Calendar className="w-full rounded-xl"/>
             <div className="flex flex-col gap-4 mt-auto mb-28">
               <h2 className="text-2xl font-semibold">Upcoming</h2>
                 <div className="flex gap-4 bg-pink-50 border rounded-xl p-2">

@@ -1,5 +1,5 @@
 import type { Route } from "./+types/logs";
-import { Logs, loader } from "../features/logs";
+import { Logs, loader } from "../components/logs";
 
 export { loader };
 
