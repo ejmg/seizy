@@ -3,31 +3,7 @@ import { Calendar } from "~/components/ui/calendar"
 
 export function Dashboard () {
   return (
-    <main className="flex">
-      <div className="flex-1 flex flex-col min-h-0 px-2">
-        <header className="min-h-9 h-20 w-full">
-          <nav className="flex justify-start items-center py-2 px-3 h-full text-primary-foreground">
-            <div className="flex items-center mr-auto text-xl gap-2">
-              <Avatar>
-                <AvatarImage src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:dsbpb3w7glnyddtbewg73g74/bafkreifylne5jo23smxx2qfihcfetoscrm4sbdl7u4xzrd2rwv26zt6bau@jpeg" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <p>$USER</p>
-            </div>
-            <div className="flex gap-4 text-lg pr-2">
-              <div className="border rounded-full py-2 px-4">
-                <p>Dashboard</p>
-              </div>
-              <div className="py-2 px-4">
-                <p>Calendar</p>
-              </div>
-              <div className="py-2 px-4">
-                <p>Logs</p>
-              </div>
-            </div>
-          </nav>
-        </header>
-        <div className="flex rounded-2xl bg-zinc-200 w-full h-full px-12 py-8">
+        <div className="flex w-full">
           <div className="flex flex-col w-2/3 gap-4">
             <h1 className="text-3xl font-bold">Hello, $USER</h1>
             <div className="flex flex-col gap-4">
@@ -97,8 +73,6 @@ export function Dashboard () {
             </div>
           </div>
         </div>
-      </div>
-    </main>
   );
 }
 

@@ -20,8 +20,8 @@ export function Logs() {
   const { seizures } = useLoaderData<typeof loader>();
 
   return (
-    <main className="flex flex-col p-8 space-y-4">
-      <h1 className="text-3xl font-bold text-primary-foreground">Seizure Logs</h1>
+    <div className="flex flex-col w-full p-8 space-y-4">
+      <h1 className="text-3xl font-bold">Seizure Logs</h1>
       <div className="space-y-2">
         {seizures.map((seizure) => (
           <div key={seizure.id} className="border rounded-lg p-4 bg-white">
@@ -36,6 +36,6 @@ export function Logs() {
           </div>
         ))}
       </div>
-    </main>
+    </div>
   );
 }
