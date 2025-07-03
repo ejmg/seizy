@@ -94,13 +94,14 @@ export function AddSeizureForm({ pets }: { pets: Pet[] }) {
         {/* Duration */}
         <div>
           <label htmlFor="duration" className="block text-sm font-medium mb-2">
-            Duration (seconds)
+            Duration (minutes)
           </label>
           <input
             type="number"
             id="duration"
             name="duration"
             min="1"
+            defaultValue={2}
             required
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
           />

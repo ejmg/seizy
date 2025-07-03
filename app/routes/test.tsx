@@ -24,6 +24,17 @@ export async function loader() {
 export default function Test() {
   const { pets, seizures, status, error } = useLoaderData<typeof loader>();
 
+  // if (pets.length === 0) {
+  //   petService.create({
+  //     name: "Antoninus Pius",
+  //     species: "dog",
+  //     breed: "Lab Mix",
+  //     birth_date: "2018-07-15",
+  //     avatar_url:
+  //       "https://cdn.bsky.app/img/feed_thumbnail/plain/did:plc:dsbpb3w7glnyddtbewg73g74/bafkreid4pb6wlx7pzq4coldz4tdg2jv5x2uzods6yi7m7ha4iwb5ngwzta@jpeg",
+  //   });
+  // }
+
   return (
     <div className="p-8 space-y-6">
       <h1 className="text-3xl font-bold">Database Test</h1>
