@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router";
-import mockData from "~/MOCK_DATA.json";
+import { seizureService } from "~/lib/database";
+// import mockData from "~/MOCK_DATA.json";
 
 type SeizureRecord = {
   id: number;
@@ -12,11 +13,10 @@ type SeizureRecord = {
 };
 
 export async function loader() {
-  return { seizures: mockData as SeizureRecord[] };
+  return { seizures: seizureService.getAll() };
 }
 
 export function Logs() {
-
   const { seizures } = useLoaderData<typeof loader>();
 
   return (
@@ -27,11 +27,13 @@ export function Logs() {
           <div key={seizure.id} className="border rounded-lg p-4 bg-white">
             <div className="flex justify-between">
               <h3 className="font-semibold">{seizure.type}</h3>
-              <span className="text-sm text-gray-500">{new Date(seizure.date).toLocaleDateString()}</span>
+              <span className="text-sm text-gray-500">
+                {new Date(seizure.date).toLocaleDateString()}
+              </span>
             </div>
             <p>Duration: {seizure.duration}</p>
-            <p>Symptoms: {seizure.symptoms.join(", ")}</p>
-            <p>Treatments: {seizure.treatment.join(", ")}</p>
+            <p>Symptoms: {seizure.symptoms?.join(", ")}</p>
+            <p>Treatments: {seizure.treatment?.join(", ")}</p>
             {seizure.notes && <p>Notes: {seizure.notes}</p>}
           </div>
         ))}
