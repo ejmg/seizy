@@ -31,7 +31,7 @@ export function Logs() {
                 {new Date(seizure.date).toLocaleDateString()}
               </span>
             </div>
-            <p>Duration: {seizure.duration}</p>
+            <p>Duration: {seizure.duration} minutes</p>
             <p>Symptoms: {seizure.symptoms?.join(", ")}</p>
             <p>Treatments: {seizure.treatment?.join(", ")}</p>
             {seizure.notes && <p>Notes: {seizure.notes}</p>}

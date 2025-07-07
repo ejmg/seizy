@@ -5,4 +5,5 @@ export default [
   route("/logs", "routes/logs.tsx"),
   route("/test", "routes/test.tsx"),
   route("/add-seizure", "routes/add-seizure.tsx"),
+  route("/add-pet", "routes/add-pet.tsx"),
 ] satisfies RouteConfig;
