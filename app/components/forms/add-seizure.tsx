@@ -1,5 +1,5 @@
 import { Form } from "react-router";
-import type { Pet } from "~/lib/database";
+import type { Pet } from "~/lib/types";
 
 const SEIZURE_TYPES = [
   "focal-aware",

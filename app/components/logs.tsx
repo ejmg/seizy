@@ -1,23 +1,19 @@
 import { useLoaderData } from "react-router";
-import { seizureService } from "~/lib/database";
-// import mockData from "~/MOCK_DATA.json";
+import type { SeizureWithPet } from "~/lib/types";
 
 type SeizureRecord = {
   id: number;
   type: string;
   date: string;
   duration: number;
-  symptoms: string[];
-  treatment: string[];
-  notes: string;
+  symptoms?: string[];
+  treatment?: string[];
+  notes?: string;
+  pet_name?: string;
 };
 
-export async function loader() {
-  return { seizures: seizureService.getAll() };
-}
-
 export function Logs() {
-  const { seizures } = useLoaderData<typeof loader>();
+  const { seizures } = useLoaderData<{ seizures: SeizureWithPet[] }>();
 
   return (
     <div className="flex flex-col w-full p-8 space-y-4">
@@ -31,7 +27,7 @@ export function Logs() {
                 {new Date(seizure.date).toLocaleDateString()}
               </span>
             </div>
-            <p>Duration: {seizure.duration} minutes</p>
+            <p>Duration: {seizure.duration} seconds</p>
             <p>Symptoms: {seizure.symptoms?.join(", ")}</p>
             <p>Treatments: {seizure.treatment?.join(", ")}</p>
             {seizure.notes && <p>Notes: {seizure.notes}</p>}

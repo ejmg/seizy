@@ -1,5 +1,10 @@
 import Database from "better-sqlite3";
 import { join } from "path";
+import type { Pet, Seizure, SeizureWithPet } from "./types";
+
+export const serializeArray = (arr?: string[]) =>
+  arr ? JSON.stringify(arr) : null;
+export const deserializeArray = (str?: string) => (str ? JSON.parse(str) : []);
 
 let db: Database.Database | null = null;
 
@@ -52,35 +57,6 @@ function initializeTables() {
    `);
 }
 
-export interface Pet {
-  id?: number;
-  name: string;
-  species?: string;
-  breed?: string;
-  birth_date?: string;
-  avatar_url?: string;
-  created_at?: string;
-}
-
-export interface Seizure {
-  id?: number;
-  pet_id: number;
-  type: 'focal-aware' | 'focal-impaired' | 'absence' | 'myoclonic' | 'tonic' | 'clonic' | 'tonic-clonic' | 'atonic';
-  date: string;
-  duration: number;
-  symptoms?: string[];
-  treatment?: string[];
-  notes?: string;
-  created_at?: string;
-}
-
-export interface SeizureWithPet extends Seizure {
-  pet_name: string;
-}
-
-export const serializeArray = (arr?: string[]) => arr ? JSON.stringify(arr) : null;
-export const deserializeArray = (str?: string) => str ? JSON.parse(str) : [];
-
 export const petService = {
   create(pet: Omit<Pet, "id" | "created_at">) {
     const db = getDb();
@@ -89,7 +65,13 @@ export const petService = {
       VALUES (?, ?, ?, ?, ?)
     `);
 
-    const result = stmt.run(pet.name, pet.species, pet.breed, pet.birth_date, pet.avatar_url);
+    const result = stmt.run(
+      pet.name,
+      pet.species,
+      pet.breed,
+      pet.birth_date,
+      pet.avatar_url
+    );
     return result.lastInsertRowid as number;
   },
 
@@ -107,10 +89,12 @@ export const petService = {
 
   update(id: number, pet: Partial<Pet>) {
     const db = getDb();
-    
-    const fields = Object.keys(pet).filter(key => key !== "id" && key !== "created_at");
-    const setClause = fields.map(field => `${field} = ?`).join(", ");
-    const values = fields.map(field => pet[field as keyof Pet]);
+
+    const fields = Object.keys(pet).filter(
+      (key) => key !== "id" && key !== "created_at"
+    );
+    const setClause = fields.map((field) => `${field} = ?`).join(", ");
+    const values = fields.map((field) => pet[field as keyof Pet]);
 
     const stmt = db.prepare(`UPDATE pets SET ${setClause} WHERE id = ?`);
     return stmt.run(...values, id);
@@ -121,7 +105,7 @@ export const petService = {
     const stmt = db.prepare("DELETE FROM pets WHERE id = ?");
     return stmt.run(id);
   },
-}
+};
 
 export const seizureService = {
   create(seizure: Omit<Seizure, "id" | "created_at">) {
@@ -138,7 +122,7 @@ export const seizureService = {
       seizure.duration,
       serializeArray(seizure.symptoms),
       serializeArray(seizure.treatment),
-      seizure.notes,
+      seizure.notes
     );
 
     return result.lastInsertRowid as number;
@@ -154,7 +138,7 @@ export const seizureService = {
     `);
 
     const rows = stmt.all() as any[];
-    return rows.map(row => ({
+    return rows.map((row) => ({
       ...row,
       symptoms: deserializeArray(row.symptoms),
       treatment: deserializeArray(row.treatment),
@@ -183,15 +167,17 @@ export const seizureService = {
   update(id: number, seizure: Partial<Seizure>) {
     const db = getDb();
 
-    const fields = Object.keys(seizure).filter(key => key !== "id" && key !== "created_at");
-    const setClause = fields.map(field => `${field} = ?`).join(", ");
-    const values = fields.map(field => {
+    const fields = Object.keys(seizure).filter(
+      (key) => key !== "id" && key !== "created_at"
+    );
+    const setClause = fields.map((field) => `${field} = ?`).join(", ");
+    const values = fields.map((field) => {
       const value = seizure[field as keyof Seizure];
       if (field === "symptoms" || field === "treatment") {
-        return serializeArray(value as string[])
+        return serializeArray(value as string[]);
       }
       return value;
-    })
+    });
     const stmt = db.prepare(`UPDATE seizures SET ${setClause} WHERE id = ?`);
     return stmt.run(...values, id);
   },
@@ -200,5 +186,5 @@ export const seizureService = {
     const db = getDb();
     const stmt = db.prepare("DELETE FROM seizures WHERE id = ?");
     return stmt.run(id);
-  }
-}
+  },
+};

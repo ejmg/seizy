@@ -1,6 +1,6 @@
 import { useLoaderData, Link } from "react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import type { Pet } from "~/lib/database";
+import type { Pet } from "~/lib/types";
 
 export function Pets() {
   const { pets } = useLoaderData<{ pets: Pet[] }>();

@@ -1,7 +1,10 @@
 import type { Route } from "./+types/logs";
-import { Logs, loader } from "../components/logs";
+import { Logs } from "../components/logs";
+import { seizureService } from "~/lib/database";
 
-export { loader };
+export async function loader() {
+  return { seizures: seizureService.getAll() };
+}
 
 export function meta({}: Route.MetaArgs) {
   return [

@@ -16,6 +16,9 @@ export function NavBar() {
           <Link to="/" className="border rounded-full py-2 px-4">
             Dashboard
           </Link>
+          <Link to="/pets" className="py-2 px-4">
+            pets
+          </Link>
           <Link to="/logs" className="py-2 px-4">
             Logs
           </Link>
