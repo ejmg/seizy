@@ -1,17 +1,6 @@
 import { useLoaderData } from "react-router";
 import type { SeizureWithPet } from "~/lib/types";
 
-type SeizureRecord = {
-  id: number;
-  type: string;
-  date: string;
-  duration: number;
-  symptoms?: string[];
-  treatment?: string[];
-  notes?: string;
-  pet_name?: string;
-};
-
 export function Logs() {
   const { seizures } = useLoaderData<{ seizures: SeizureWithPet[] }>();
 

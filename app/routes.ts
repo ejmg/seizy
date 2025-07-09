@@ -7,4 +7,5 @@ export default [
   route("/add-seizure", "routes/add-seizure.tsx"),
   route("/add-pet", "routes/add-pet.tsx"),
   route("/pets", "routes/pets.tsx"),
+  route("/edit-pet/:id", "routes/edit-pet.tsx"),
 ] satisfies RouteConfig;
