@@ -1,7 +1,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
+
+const isCurrentPath = (pathname: string, navlink: string) => {
+  return pathname === navlink
+    ? "border-2 rounded-full bg-indigo-700 py-2 px-4"
+    : "py-2 px-4";
+};
 
 export function NavBar() {
+  const { pathname } = useLocation();
   return (
     <header className="min-h-9 h-20 w-full">
       <nav className="flex justify-start items-center py-2 px-3 h-full text-primary-foreground">
@@ -13,13 +20,13 @@ export function NavBar() {
           <p>$USER</p>
         </div>
         <div className="flex gap-4 text-lg pr-2">
-          <Link to="/" className="border rounded-full py-2 px-4">
+          <Link to="/" className={isCurrentPath(pathname, "/")}>
             Dashboard
           </Link>
-          <Link to="/pets" className="py-2 px-4">
-            pets
+          <Link to="/pets" className={isCurrentPath(pathname, "/pets")}>
+            Pets
           </Link>
-          <Link to="/logs" className="py-2 px-4">
+          <Link to="/logs" className={isCurrentPath(pathname, "/logs")}>
             Logs
           </Link>
         </div>
