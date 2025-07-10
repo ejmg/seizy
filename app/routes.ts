@@ -5,6 +5,7 @@ export default [
   route("/logs", "routes/logs.tsx"),
   route("/test", "routes/test.tsx"),
   route("/add-seizure", "routes/add-seizure.tsx"),
+  route("/edit-seizure/:id", "routes/edit-seizure.tsx"),
   route("/add-pet", "routes/add-pet.tsx"),
   route("/pets", "routes/pets.tsx"),
   route("/edit-pet/:id", "routes/edit-pet.tsx"),
