@@ -1,7 +1,7 @@
 import { Form } from "react-router";
 import type { Pet } from "~/lib/types";
 
-const SEIZURE_TYPES = [
+export const SEIZURE_TYPES = [
   "focal-aware",
   "focal-impaired",
   "absence",
@@ -12,7 +12,7 @@ const SEIZURE_TYPES = [
   "atonic",
 ] as const;
 
-const COMMON_SYMPTOMS = [
+export const COMMON_SYMPTOMS = [
   "Loss of consciousness",
   "Muscle jerking",
   "Confusion",
@@ -23,7 +23,7 @@ const COMMON_SYMPTOMS = [
   "Bladder control loss",
 ];
 
-const COMMON_TREATMENTS = [
+export const COMMON_TREATMENTS = [
   "750mg Keppra",
   "100mg Pheno",
   "Midazolam",
@@ -33,7 +33,7 @@ const COMMON_TREATMENTS = [
 
 export function AddSeizureForm({ pets }: { pets: Pet[] }) {
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="max-w-lg mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Record Seizure Event</h1>
 
       <Form method="post" className="space-y-6">
@@ -46,7 +46,7 @@ export function AddSeizureForm({ pets }: { pets: Pet[] }) {
             id="pet_id"
             name="pet_id"
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-800"
           >
             <option value="">Select a pet</option>
             {pets.map((pet) => (
@@ -66,7 +66,7 @@ export function AddSeizureForm({ pets }: { pets: Pet[] }) {
             id="type"
             name="type"
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800"
           >
             <option value="">Select seizure type</option>
             {SEIZURE_TYPES.map((type) => (
@@ -87,14 +87,14 @@ export function AddSeizureForm({ pets }: { pets: Pet[] }) {
             id="date"
             name="date"
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800"
           />
         </div>
 
         {/* Duration */}
         <div>
           <label htmlFor="duration" className="block text-sm font-medium mb-2">
-            Duration (minutes)
+            Duration (seconds)
           </label>
           <input
             type="number"
@@ -103,7 +103,7 @@ export function AddSeizureForm({ pets }: { pets: Pet[] }) {
             min="1"
             defaultValue={2}
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800"
           />
         </div>
         <div>
@@ -115,7 +115,7 @@ export function AddSeizureForm({ pets }: { pets: Pet[] }) {
                   type="checkbox"
                   name="symptoms"
                   value={symptom}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  className="rounded border-gray-300 focus:ring-gray-800"
                 />
                 <span className="text-sm">{symptom}</span>
               </label>
@@ -135,7 +135,7 @@ export function AddSeizureForm({ pets }: { pets: Pet[] }) {
                   type="checkbox"
                   name="treatment"
                   value={treatment}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  className="rounded border-gray-300 focus:ring-gray-800"
                 />
                 <span className="text-sm">{treatment}</span>
               </label>
@@ -153,15 +153,15 @@ export function AddSeizureForm({ pets }: { pets: Pet[] }) {
             name="notes"
             rows={3}
             placeholder="Additional details about the seizure event..."
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800"
           />
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-2 
-  focus:ring-blue-500"
+          className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-800 focus:ring-2 
+  focus:ring-indigo-500"
         >
           Record Seizure Event
         </button>
