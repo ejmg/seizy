@@ -31,3 +31,12 @@ export interface Seizure {
 export interface SeizureWithPet extends Seizure {
   pet_name: string;
 }
+
+export interface User {
+  id?: number;
+  email: string;
+  password_hash?: string;
+  name?: string;
+  status: "pending" | "active";
+  created_at?: string;
+}

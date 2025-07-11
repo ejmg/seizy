@@ -1,6 +1,7 @@
 import Database from "better-sqlite3";
+import bcrypt from "bcrypt";
 import { join } from "path";
-import type { Pet, Seizure, SeizureWithPet } from "./types";
+import type { Pet, Seizure, SeizureWithPet, User } from "./types";
 
 export const serializeArray = (arr?: string[]) =>
   arr ? JSON.stringify(arr) : null;
@@ -54,7 +55,28 @@ function initializeTables() {
   db.exec(`
     CREATE INDEX IF NOT EXISTS idx_seizures_pet_id ON seizures(pet_id);
     CREATE INDEX IF NOT EXISTS idx_seizures_date ON seizures(date);
-   `);
+  `);
+
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      email TEXT UNIQUE NOT NULL,
+      password_hash TEXT,
+      name TEXT,
+      status TEXT CHECK (status IN ('pending', 'active')) DEFAULT 'pending',
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+  try {
+    db.exec(`ALTER TABLE pets ADD COLUMN user_id INTEGER REFERENCES users(id)`);
+  } catch (error) {
+    // an error means the alteration already exists, all is well, nothing to be done.
+  }
+
+  db.exec(`
+    CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+    CREATE INDEX IF NOT EXISTS idx_pets_user_id ON pets(user_id);
+  `);
 }
 
 export const petService = {
@@ -186,5 +208,69 @@ export const seizureService = {
     const db = getDb();
     const stmt = db.prepare("DELETE FROM seizures WHERE id = ?");
     return stmt.run(id);
+  },
+};
+
+export const userService = {
+  create(user: Omit<User, "id" | "created_at">) {
+    const db = getDb();
+
+    const stmt = db.prepare(`
+      INSERT INTO users (email, password_hash, name, status)
+      VALUES (?, ?, ?, ?)
+    `);
+
+    const result = stmt.run(
+      user.email,
+      user.password_hash,
+      user.name,
+      user.status
+    );
+    return result.lastInsertRowid as number;
+  },
+
+  getByEmail(email: string): User | null {
+    const db = getDb();
+
+    const stmt = db.prepare(`SELECT * FROM users WHERE email = ?`);
+    return stmt.get(email) as User | null;
+  },
+
+  getById(id: number): User | null {
+    const db = getDb();
+
+    const stmt = db.prepare(`SELECT * FROM users WHERE id = ?`);
+    return stmt.get(id) as User | null;
+  },
+
+  update(id: number, user: Partial<User>) {
+    const db = getDb();
+
+    const fields = Object.keys(user).filter(
+      (key) => key !== "id" && key !== "created_at"
+    );
+    const setClause = fields.map((field) => `${field} = ?`).join(", ");
+    const values = fields.map((field) => user[field as keyof User]);
+    const stmt = db.prepare(`UPDATE users SET ${setClause} WHERE id = ?`);
+
+    return stmt.run(...values, id);
+  },
+
+  async verifyPassword(email: string, password: string): Promise<User | null> {
+    const user = this.getByEmail(email);
+    if (!user || !user.password_hash) return null;
+
+    const isValid = await bcrypt.compare(password, user.password_hash);
+
+    return isValid ? user : null;
+  },
+
+  async hashPassword(password: string): Promise<string> {
+    return bcrypt.hash(password, 12);
+  },
+
+  isEmailApproved(email: string): boolean {
+    const user = this.getByEmail(email);
+    return user !== null;
   },
 };
