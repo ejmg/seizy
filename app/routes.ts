@@ -10,4 +10,5 @@ export default [
   route("/pets", "routes/pets.tsx"),
   route("/edit-pet/:id", "routes/edit-pet.tsx"),
   route("/login", "routes/login.tsx"),
+  route("/signup", "routes/signup.tsx"),
 ] satisfies RouteConfig;
