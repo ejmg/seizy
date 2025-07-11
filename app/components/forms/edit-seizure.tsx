@@ -18,7 +18,6 @@ export function EditSeizureForm({ seizure, pets }: EditSeizureFormProps) {
       <h1 className="text-3xl font-bold mb-6">Edit Seizure Log</h1>
 
       <Form method="post" className="space-y-6">
-        {/* We'll add form fields here */}
         <div>
           <label htmlFor="pet_id" className="block text-sm font-medium mb-2">
             Pet
