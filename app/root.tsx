@@ -5,11 +5,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "react-router";
 
 import type { Route } from "./+types/root";
 import "./app.css";
 import { NavBar } from "./components/nav-bar";
+import { getAuthUserId } from "./lib/auth";
+import { userService } from "./lib/database";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -24,7 +27,18 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+export async function loader({ request }: Route.LoaderArgs) {
+  const userId = getAuthUserId(request);
+  let user = null;
+  if (userId) {
+    user = userService.getById(userId);
+  }
+
+  return { user };
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { user } = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -35,7 +49,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="h-screen">
         <div className="flex flex-col min-h-0 px-2">
-          <NavBar />
+          <NavBar user={user} />
           <main className="flex rounded-2xl bg-zinc-200 w-full h-full px-12 py-8">
             {children}
           </main>
