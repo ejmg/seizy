@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { Link, useLocation } from "react-router";
+import { Form, Link, useLocation } from "react-router";
 
 const isCurrentPath = (pathname: string, navlink: string) => {
   return pathname === navlink
@@ -30,6 +30,15 @@ export function NavBar() {
             Logs
           </Link>
         </div>
+
+        <Form method="POST" action="/logout" className="contents">
+          <button
+            type="submit"
+            className="py-2 px-4 text-red-400 hover:text-red-300"
+          >
+            Logout
+          </button>
+        </Form>
       </nav>
     </header>
   );

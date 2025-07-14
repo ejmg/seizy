@@ -71,6 +71,15 @@ export function SignupForm() {
         >
           Complete Registration
         </button>
+
+        <div className="mt-6 text-center">
+          <p>
+            Already have an account?{" "}
+            <Link to="/login" className="text-indigo-600 hover:text-indigo-800">
+              Login
+            </Link>
+          </p>
+        </div>
       </Form>
     </div>
   );

@@ -2,8 +2,10 @@ import type { Route } from "./+types/edit-pet";
 import { EditPetForm } from "../components/forms/edit-pet";
 import { redirect, useLoaderData } from "react-router";
 import { petService } from "~/lib/database";
+import { requireAuth } from "~/lib/auth";
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
+  requireAuth(request);
   const petId = Number(params.id);
   const pet = petService.getById(petId);
   if (!pet) {

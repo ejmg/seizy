@@ -2,8 +2,10 @@ import type { Route } from "./+types/add-seizure";
 import { AddSeizureForm } from "~/components/forms/add-seizure";
 import { redirect, useLoaderData } from "react-router";
 import { petService, seizureService } from "~/lib/database";
+import { requireAuth } from "~/lib/auth";
 
-export async function loader() {
+export async function loader({ request }: Route.LoaderArgs) {
+  requireAuth(request);
   const pets = petService.getAll();
   return { pets };
 }

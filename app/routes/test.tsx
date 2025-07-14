@@ -21,6 +21,36 @@ export async function loader() {
   }
 }
 
+// export async function action({ request }: Route.ActionArgs) {
+//   const formData = await request.formData();
+//   const action = formData.get("action");
+
+//   if (action === "add-test-user") {
+//     const email = "EMAIL_HERE";
+
+//     try {
+//       // Check if user already exists
+//       const existingUser = userService.getByEmail(email);
+
+//       if (!existingUser) {
+//         // Add pre-approved user with pending status
+//         userService.create({
+//           email,
+//           status: "pending",
+//         });
+
+//         return { message: `Test user ${email} added successfully!` };
+//       } else {
+//         return { message: `User ${email} already exists` };
+//       }
+//     } catch (error) {
+//       return { error: "Failed to add test user" };
+//     }
+//   }
+
+//   return {};
+// }
+
 export default function Test() {
   const { pets, seizures, status, error } = useLoaderData<typeof loader>();
 
@@ -59,6 +89,18 @@ export default function Test() {
           </pre>
         </div>
       </div>
+      {/* <div className="mt-6">
+        <h3 className="text-lg font-medium">Add Test User</h3>
+        <Form method="post">
+          <input type="hidden" name="action" value="add-test-user" />
+          <button
+            type="submit"
+            className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-800"
+          >
+            Add EMAIL_HERE as approved user
+          </button>
+        </Form>
+      </div> */}
     </div>
   );
 }

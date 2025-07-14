@@ -2,6 +2,11 @@ import type { Route } from "./+types/add-pet";
 import { redirect } from "react-router";
 import { petService } from "~/lib/database";
 import { AddPetForm } from "~/components/forms/add-pet";
+import { requireAuth } from "~/lib/auth";
+
+export async function loader({ request }: Route.LoaderArgs) {
+  requireAuth(request);
+}
 
 export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();

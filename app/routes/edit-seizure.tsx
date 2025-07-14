@@ -2,8 +2,10 @@ import type { Route } from "./+types/edit-seizure";
 import { EditSeizureForm } from "~/components/forms/edit-seizure";
 import { redirect, useLoaderData } from "react-router";
 import { petService, seizureService } from "~/lib/database";
+import { requireAuth } from "~/lib/auth";
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
+  requireAuth(request);
   const seizureId = Number(params.id);
   const seizure = seizureService.getById(seizureId);
   if (!seizure) {
