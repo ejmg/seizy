@@ -9,12 +9,6 @@ export function Pets() {
     <div className="flex w-full p-8 space-y-6">
       <div className="flex flex-col gap-4">
         <h1 className="text-3xl font-bold">Pets</h1>
-        <Link
-          to="/add-pet"
-          className="bg-indigo-600 text-primary-foreground px-4 py-2 rounded-lg hover:bg-indigo-800 focus:ring-2 focus:ring-indigo-500 w-fit"
-        >
-          Add New Pet
-        </Link>
         {pets.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-lg mb-4">No pets added yet</p>
@@ -68,6 +62,12 @@ export function Pets() {
             ))}
           </div>
         )}
+        <Link
+          to="/add-pet"
+          className="bg-indigo-600 text-primary-foreground px-4 py-2 rounded-lg hover:bg-indigo-800 focus:ring-2 focus:ring-indigo-500 w-fit"
+        >
+          Add New Pet
+        </Link>
       </div>
     </div>
   );
