@@ -1,20 +1,66 @@
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Calendar } from "~/components/ui/calendar";
-import type { SeizureWithPet } from "~/lib/types";
+import type { Pet, SeizureWithPet } from "~/lib/types";
 import { Log } from "./logs";
+import { Link } from "react-router";
 
 interface DashboardProps {
   seizures: SeizureWithPet[];
+  pets: Pet[];
 }
 
-export function Dashboard({ seizures }: DashboardProps) {
+const PetCard = ({ pet }: { pet: Pet }) => {
+  return (
+    <div className="bg-white border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex items-center space-x-4 mb-4">
+        <Avatar className="h-16 w-16">
+          <AvatarImage src={pet.avatar_url} />
+          <AvatarFallback className="text-lg">
+            {pet.name.charAt(0).toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
+        <div>
+          <h3 className="text-xl font-semibold">{pet.name}</h3>
+          <p className="text-gray-600">
+            {pet.species} {pet.breed && `– ${pet.breed}`}
+          </p>
+        </div>
+      </div>
+      {pet.birth_date && (
+        <p className="text-sm text-gray-500 mb-3">
+          Born {new Date(pet.birth_date).toLocaleDateString()}
+        </p>
+      )}
+
+      <div className="flex space-x-2">
+        <Link
+          to={`/edit-pet/${pet.id}`}
+          className="flex-1 text-center bg-indigo-600 text-primary-foreground py-2 rounded-lg hover:bg-indigo-800"
+        >
+          Edit
+        </Link>
+        <Link
+          to={`/logs?pet=${pet.id}`}
+          className="flex-1 text-center bg-gray-100 py-2 rounded-lg hover:bg-gray-200"
+        >
+          View Logs
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export function Dashboard({ seizures, pets }: DashboardProps) {
   return (
     <div className="flex w-full p-8 space-y-4">
       <div className="flex flex-col w-2/3 gap-4">
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl font-semibold">Overview</h2>
           <div className="flex flex-col gap-2 w-5/6">
-            <div className="flex gap-10 bg-secondary border rounded-xl px-12 py-4">
+            {pets.map((pet) => (
+              <PetCard pet={pet} />
+            ))}
+            {/* <div className="flex gap-10 bg-secondary border rounded-xl px-12 py-4">
               <div className="flex flex-col items-center gap-2">
                 <Avatar className="h-20 w-20">
                   <AvatarImage src="https://cdn.bsky.app/img/feed_thumbnail/plain/did:plc:dsbpb3w7glnyddtbewg73g74/bafkreid4pb6wlx7pzq4coldz4tdg2jv5x2uzods6yi7m7ha4iwb5ngwzta@jpeg" />
@@ -33,14 +79,14 @@ export function Dashboard({ seizures }: DashboardProps) {
                 <p className="font-semibold">Adelita</p>
               </div>
               <div>lorem ipsum you dumb fuck</div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl font-semibold">Recent Logs</h2>
           <div className="flex flex-col items-start gap-2 w-5/6">
             {seizures.map((seizure) => (
-              <Log seizure={seizure} />
+              <Log key={seizure.id} seizure={seizure} />
             ))}
           </div>
         </div>

@@ -8,10 +8,7 @@ interface LogProps extends React.ComponentProps<"div"> {
 
 export function Log({ seizure, className, ...props }: LogProps) {
   return (
-    <div
-      key={seizure.id}
-      className={cn("border rounded-lg p-4 bg-white", className)}
-    >
+    <div className={cn("border rounded-lg p-4 bg-white", className)} {...props}>
       <div className="flex justify-between">
         <h3 className="font-semibold">{seizure.type}</h3>
         <span className="text-sm text-gray-500">
