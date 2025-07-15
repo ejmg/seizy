@@ -25,7 +25,9 @@ export function NavBar({ user }: NavBarProps) {
                 {user.name?.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <p className="text-xl font-bold">{user.name}</p>
+            <Link to="/edit-profile">
+              <p className="text-xl font-bold">{user.name}</p>
+            </Link>
           </div>
         ) : (
           <p className="text-2xl font-bold mr-auto">Seizy</p>
