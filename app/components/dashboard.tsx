@@ -13,7 +13,7 @@ const PetCard = ({ pet }: { pet: Pet }) => {
   return (
     <div className="bg-white border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-center space-x-4 mb-4">
-        <Avatar className="h-16 w-16">
+        <Avatar className="h-20 w-20">
           <AvatarImage src={pet.avatar_url} />
           <AvatarFallback className="text-lg">
             {pet.name.charAt(0).toUpperCase()}
@@ -28,7 +28,10 @@ const PetCard = ({ pet }: { pet: Pet }) => {
       </div>
       {pet.birth_date && (
         <p className="text-sm text-gray-500 mb-3">
-          Born {new Date(pet.birth_date).toLocaleDateString()}
+          Born{" "}
+          {new Date(pet.birth_date).toLocaleDateString("en-US", {
+            timeZone: "UTC",
+          })}
         </p>
       )}
 
@@ -60,26 +63,6 @@ export function Dashboard({ seizures, pets }: DashboardProps) {
             {pets.map((pet) => (
               <PetCard pet={pet} />
             ))}
-            {/* <div className="flex gap-10 bg-secondary border rounded-xl px-12 py-4">
-              <div className="flex flex-col items-center gap-2">
-                <Avatar className="h-20 w-20">
-                  <AvatarImage src="https://cdn.bsky.app/img/feed_thumbnail/plain/did:plc:dsbpb3w7glnyddtbewg73g74/bafkreid4pb6wlx7pzq4coldz4tdg2jv5x2uzods6yi7m7ha4iwb5ngwzta@jpeg" />
-                  <AvatarFallback>Pet</AvatarFallback>
-                </Avatar>
-                <p className="font-semibold">Pius</p>
-              </div>
-              <div>lorem ipsum you dumb fuck</div>
-            </div>
-            <div className="flex gap-10 bg-secondary border rounded-xl px-12 py-4">
-              <div className="flex flex-col items-center gap-2">
-                <Avatar className="h-20 w-20">
-                  <AvatarImage src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:dsbpb3w7glnyddtbewg73g74/bafkreiesz7ryrhsma6edxeyv5t3togazupwtvthuquqqcxxv3kpwiz3oeq@jpeg" />
-                  <AvatarFallback>Pet</AvatarFallback>
-                </Avatar>
-                <p className="font-semibold">Adelita</p>
-              </div>
-              <div>lorem ipsum you dumb fuck</div>
-            </div> */}
           </div>
         </div>
         <div className="flex flex-col gap-4">
@@ -93,7 +76,7 @@ export function Dashboard({ seizures, pets }: DashboardProps) {
       </div>
       <div className="flex flex-col gap-4 w-1/3">
         <h2 className="text-2xl font-semibold">Calendar</h2>
-        <Calendar className="w-full rounded-xl" />
+        <Calendar className="w-full rounded-xl bg-card" />
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl font-semibold">Upcoming</h2>
           <div className="flex gap-4 bg-pink-50 border rounded-xl p-2">
