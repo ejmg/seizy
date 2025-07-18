@@ -11,8 +11,8 @@ import { Button } from "../ui/button";
 
 export function LoginForm() {
   return (
-    <div className="flex flex-col w-full max-w-lg p-6">
-      <h1 className="text-3xl font-bold mb-6">Login</h1>
+    <div className="flex flex-col w-full max-w-lg p-3 sm:p-6">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Login</h1>
       <Card className="w-full">
         <CardContent>
           <Form method="POST" className="space-y-6">

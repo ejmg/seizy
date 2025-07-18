@@ -16,8 +16,8 @@ interface EditSeizureFormProps {
 
 export function EditSeizureForm({ seizure, pets }: EditSeizureFormProps) {
   return (
-    <div className="flex flex-col w-full max-w-lg p-6">
-      <h1 className="text-3xl font-bold mb-6">Edit Seizure Log</h1>
+    <div className="flex flex-col w-full max-w-lg p-3 sm:p-6">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Edit Seizure Log</h1>
       <Card className="w-full">
         <CardContent className="w-full">
           <Form method="post" className="space-y-6">

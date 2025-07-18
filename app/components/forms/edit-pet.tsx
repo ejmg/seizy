@@ -9,8 +9,8 @@ interface EditPetFormProps {
 
 export function EditPetForm({ pet }: EditPetFormProps) {
   return (
-    <div className="flex flex-col w-full max-w-lg p-6">
-      <h1 className="text-3xl font-bold mb-6">Edit {pet.name}</h1>
+    <div className="flex flex-col w-full max-w-lg p-3 sm:p-6">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Edit {pet.name}</h1>
       <Card className="w-full">
         <CardContent className="w-full">
           <Form method="POST" className="space-y-6">

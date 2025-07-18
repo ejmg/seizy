@@ -35,8 +35,10 @@ export const COMMON_TREATMENTS = [
 
 export function AddSeizureForm({ pets }: { pets: Pet[] }) {
   return (
-    <div className="flex flex-col w-full max-w-lg p-6">
-      <h1 className="text-3xl font-bold mb-6">Record Seizure Event</h1>
+    <div className="flex flex-col w-full max-w-lg p-3 sm:p-6">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
+        Record Seizure Event
+      </h1>
       <Card className="w-full">
         <CardContent className="w-full">
           <Form method="post" className="space-y-6 w-full">
