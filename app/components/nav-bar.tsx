@@ -67,7 +67,7 @@ export function NavBar({ user }: NavBarProps) {
               <Form method="POST" action="/logout" className="contents">
                 <Button
                   variant="destructive"
-                  className="px-2 sm:px-4 text-xs sm:text-lg h-8 rounded-md sm:h-10 sm:py-2"
+                  className="px-2 sm:px-4 text-xs sm:text-lg h-6 rounded-md sm:h-11 sm:py-2"
                 >
                   Logout
                 </Button>

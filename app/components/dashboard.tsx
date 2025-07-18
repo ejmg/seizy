@@ -53,7 +53,7 @@ export function Dashboard({ seizures, pets }: DashboardProps) {
     <div className="flex flex-col lg:flex-row w-full p-3 sm:p-8 space-y-4 lg:space-y-0 lg:space-x-4">
       <div className="flex flex-col lg:w-2/3 gap-4">
         <div className="flex flex-col gap-4">
-          <h2 className="text-xl sm:text-2xl font-semibold">Overview</h2>
+          <h1 className="text-2xl sm:text-3xl font-bold">Overview</h1>
           <div className="flex flex-col gap-2 w-full lg:w-5/6">
             {pets.map((pet) => (
               <PetCard pet={pet} />
