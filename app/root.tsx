@@ -48,9 +48,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="h-screen">
-        <div className="flex flex-col min-h-0 px-2">
+        <div className="flex flex-col min-h-0 px-1 sm:px-12">
           <NavBar user={user} />
-          <main className="flex rounded-2xl bg-zinc-200 w-full h-full px-12 py-8">
+          <main className="flex rounded-2xl bg-background w-full h-full px-2 sm:px-12 py-4 sm:py-8">
             {children}
           </main>
         </div>

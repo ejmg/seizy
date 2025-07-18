@@ -84,6 +84,15 @@ export function NavBar({ user }: NavBarProps) {
               >
                 Login
               </Link>
+              <Link
+                to="/signup"
+                className={cn(
+                  "py-1 px-2 sm:py-2 sm:px-4",
+                  isCurrentPath(pathname, "/signup")
+                )}
+              >
+                Signup
+              </Link>
             </div>
           )}
         </div>
