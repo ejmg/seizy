@@ -4,3 +4,11 @@
 # React Router
 /.react-router/
 /build/
+
+# Database files
+*.db
+seizy.db
+
+# Environment variables
+.env
+.env.local
